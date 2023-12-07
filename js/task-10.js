@@ -20,8 +20,13 @@ const createBox = (size) => {
   return box;
 };
 
-const createBoxes = (amount) => {
+const destroyBoxes = () => {
   refs.boxes.innerHTML = "";
+};
+
+const createBoxes = (amount) => {
+  destroyBoxes();
+
   const fragment = document.createDocumentFragment();
 
   for (let i = 0, size = 30; i < amount; i += 1, size += 10) {
@@ -36,3 +41,4 @@ const createBoxes = (amount) => {
 refs.createBtn.addEventListener("click", () =>
   createBoxes(refs.inputNumber.value)
 );
+refs.destroyBtn.addEventListener("click", destroyBoxes);
