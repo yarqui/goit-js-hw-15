@@ -3,25 +3,15 @@ const form = document.querySelector("form.login-form");
 const submitForm = (e) => {
   e.preventDefault();
 
-  const formInputs = [...form.elements].filter((el) => el.nodeName === "INPUT");
+  const formData = new FormData(e.currentTarget);
+  let userCredentials = {};
 
-  const hasEmptyInputs = formInputs.some((el) => !el.value);
+  formData.forEach((val, key) => {
+    userCredentials[key] = val;
+  });
+  console.log("userCredentials:", userCredentials);
 
-  if (hasEmptyInputs) {
-    return alert("All inputs should be filled");
-  }
-
-  const userCredentials = formInputs.reduce(
-    (userCredentials, { name, value }) => {
-      userCredentials[name] = value;
-      return userCredentials;
-    },
-    {}
-  );
-
-  console.log("userCredentials", userCredentials);
-
-  form.reset();
+  e.currentTarget.reset();
   document.activeElement.blur();
 };
 
